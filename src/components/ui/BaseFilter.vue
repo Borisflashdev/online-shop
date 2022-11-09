@@ -9,7 +9,7 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <form>
-                        <div class="accordion-body row">
+                        <div class="accordion-body row pe-0">
                             <div class="col-12 col-sm-2">
                                 <label for="customRange1" class="form-label">Price: {{ priceComment }}$</label>
                                 <input type="range" class="form-range" max="100" id="customRange1" v-model="priceFilter">
@@ -19,7 +19,7 @@
                                 <select class="form-select" id="category-input" aria-label="Default select example" v-model="categoryFilter">
                                     <option value="category">All</option>
                                     <option value="'Philosophy'">Philosophy</option>
-                                    <option value="'Self Improvment'">Self Improvment</option>
+                                    <option value="'Self Improvement'">Self Improvement</option>
                                     <option value="'Manga'">Manga</option>
                                     <option value="'Biography'">Biography</option>
                                     <option value="'Scifi'">Scifi</option>
@@ -62,7 +62,7 @@
                                     <option value="'Russian'">Russian</option>
                                 </select>
                             </div>
-                            <div class="col-12 col-sm-1">
+                            <div class="col-12 col-sm-1 pe-0">
                                 <label style="color: white">ignore</label><br>
                                 <button type="button" class="btn btn-primary btn-sm mt-2 mr-5" @click="filteredProductrs()">Set Filters</button>
                             </div>
@@ -143,7 +143,7 @@ export default {
             localStorage.setItem('language', language);
             localStorage.setItem('sortBy', sort);
 
-            this.$router.push('/home/1');
+            await this.$router.push('/home/1');
             this.$emit('productsData');
         }
     }

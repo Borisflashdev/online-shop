@@ -3,6 +3,8 @@ import App from './App.vue';
 import router from './router.js';
 import store from './index.js';
 
+import BasePagination from './components/ui/BasePagination.vue';
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +14,7 @@ library.add(fas, fab);
 
 const app = createApp(App);
 app.component('font-awesome-icon', FontAwesomeIcon);
+app.component('base-pagination', BasePagination);
 app.use(store);
 app.use(router);
 app.mount('#app');
