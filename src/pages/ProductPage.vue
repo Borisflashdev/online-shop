@@ -64,7 +64,7 @@
                         @click="addProduct">Add to Cart
                         </button>
                         <p v-if="isOk" class="text-success fs-7 mt-1">Item is successfully added to your Cart.</p>
-                        <p v-if="isError" class="text-danger fs-7 mt-1">Something went wrong, please try again later.</p>
+                        <p v-if="isError" class="text-danger fs-7 mt-1">Something went wrong, please Singup or try again later.</p>
                 </div>
             </div>
         </div>
