@@ -2,8 +2,11 @@
     <div>
         <div>
             <base-filter @productsData="getFilteredData" :page="this.$route.params.page"></base-filter>
+            
             <div class="row justify-content-center">
-                <div class="card m-3 mt-4" style="width: 18rem;" v-for="product in productsData" :key="product.product_id">
+                <p v-if="isError" class="text-dark fs-5 text text-center my-5">Something went wrong, please try again later.</p>
+                <p v-if="productsData.length === 0" class="text-dark fs-5 text text-center my-5 mrg">There is no maching results.</p>
+                <div class="card m-3 mt-4 border border-3 bg-light rounded-3" style="width: 18rem;" v-for="product in productsData" :key="product.product_id">
                     <img :src="product.img" class="card-img-top" alt="product_image">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
@@ -13,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <base-pagination v-if="this.showPagination" @sendPage="sendPage()"></base-pagination>
+        <base-pagination v-if="this.showPagination && productsData.length !== 0" @sendPage="sendPage()"></base-pagination>
     </div>
 </template>
 
@@ -30,7 +33,9 @@ export default {
     data() {
         return {
             productsData: [],
-            showPagination: false
+            showPagination: false,
+            isError: false,
+            isEmpty: true
         }
     },
     computed: {
@@ -93,6 +98,7 @@ export default {
                 this.showPagination = true;
             } catch (error) {
                 console.log(error);
+                this.isError = true;
             }
         },
         getFilteredData() {
@@ -119,5 +125,8 @@ export default {
 .active-lnk {
     color: white;
     background-color: #0d6efd;
+}
+.mrg {
+    margin-bottom: 400px !important;
 }
 </style>

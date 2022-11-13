@@ -20,6 +20,9 @@ export default {
   components: {
     BaseNavBar,
     BaseFooter
+  },
+  created() {
+    this.$store.dispatch('autoLogin');
   }
 }
 </script>

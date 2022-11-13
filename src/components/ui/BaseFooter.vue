@@ -41,16 +41,16 @@
                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                             <h6 class="text-uppercase fw-bold mb-4 text">Best Selling Books</h6>
                             <p class="text">
-                                <router-link to="/products/1" class="text-reset">Meditations</router-link>
+                                <router-link to="/product/1" class="text-reset">Meditations</router-link>
                             </p>
                             <p class="text">
-                                <router-link to="/home/11" class="text-reset">The Maze Runner</router-link>
+                                <router-link to="/product/11" class="text-reset">The Maze Runner</router-link>
                             </p>
                             <p class="text" >
-                                <router-link to="/home/25" class="text-reset">The Hobbit</router-link>
+                                <router-link to="/product/25" class="text-reset">The Hobbit</router-link>
                             </p>
                             <p class="text">
-                                <router-link to="/home/1" class="text-reset">The Daily Stoic</router-link>
+                                <router-link to="/product/1" class="text-reset">The Daily Stoic</router-link>
                             </p>
                         </div>
                         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">

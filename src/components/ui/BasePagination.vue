@@ -85,4 +85,7 @@ export default {
     color: white;
     background-color: #0d6efd;
 }
+.page-link:hover {
+    cursor: pointer;
+}
 </style>

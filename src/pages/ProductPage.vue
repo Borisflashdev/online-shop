@@ -1,10 +1,11 @@
 <template>
     <div>
-        <div class="product-details row mt-4 mb-4 justify-content-center">
-            <div class="col-3">
+        <p v-if="isFatalError" class="text-dark fs-5 text text-center my-5 mrg">Something went wrong, please try again later.</p>
+        <div v-else class="product-details row mt-4 mb-4 justify-content-center mrg">
+            <div class="col-8 col-md-3 mb-3">
                 <img :src="productData.img" class="img-fluid border border-dark rounded-3" alt="product_img">
             </div>
-            <div class="col-5">
+            <div class="col-8 col-md-5">
                 <h2>{{ productData.name }}</h2>
                 <p>By {{ productData.author }}</p>
                 <div class="accordion" id="accordionExample">
@@ -57,7 +58,13 @@
                 </div>
                 <div class="mt-3">
                     <p class="text-dark fs-7">*for all questions and complaints, write to e-mail</p>
-                    <button type="button" class="btn btn-outline-primary">Add to Cart</button>
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-primary col-3" 
+                        @click="addProduct">Add to Cart
+                        </button>
+                        <p v-if="isOk" class="text-success fs-7 mt-1">Item is successfully added to your Cart.</p>
+                        <p v-if="isError" class="text-danger fs-7 mt-1">Something went wrong, please try again later.</p>
                 </div>
             </div>
         </div>
@@ -70,15 +77,47 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            productData: {}
+            productData: {},
+            quantity: 1,
+            isOk: false,
+            isError: false,
+            isFatalError: false
         }
     },
     methods: {
         async getProduct() {
             const productId = parseInt(this.$route.params.productId);
-            await axios.get(`http://localhost:5005/api/v1/products/${productId}`).then((responseData) => {
+            try {
+                await axios.get(`http://localhost:5005/api/v1/products/${productId}`).then((responseData) => {
                 this.productData = responseData.data.result[0];
             });
+            } catch (error) {
+                console.log(error);
+                this.isFatalError = true;
+            }
+        },
+        async addProduct() {
+            const config = {
+                headers: {
+                    userid: localStorage.getItem('userId'),
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            };
+
+            const data ={
+                name: "ignore_data",
+            }
+
+            const productId = parseInt(this.$route.params.productId);
+
+            try {
+                const responseData = await axios.post(`http://localhost:5005/api/v1/cart/${productId}`, data, config);
+                console.log(responseData);
+                this.isOk = true;
+            } catch (error) {
+                console.log(error);
+                this.isError = true;
+            }
         }
     },
     created() {
@@ -86,3 +125,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.mrg {
+    margin-bottom: 400px !important;
+}
+</style>
